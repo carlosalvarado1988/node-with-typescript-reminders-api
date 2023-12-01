@@ -1,16 +1,14 @@
 import { Router } from "express";
-const router = Router();
+import CreateReminderDto from "../models/reminder";
 
-interface CreateRemidnerDto {
-  title: string;
-}
+const router = Router();
 
 router.get("/", (req, res) => {
   res.send("List of reminders");
 });
 
 router.post("/", (req, res) => {
-  const { title } = req.body as CreateRemidnerDto;
+  const { title } = req.body as CreateReminderDto;
   res.send(title);
 });
 

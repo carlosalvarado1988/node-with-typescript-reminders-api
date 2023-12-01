@@ -1,15 +1,23 @@
 import { Router } from "express";
-import CreateReminderDto from "../models/reminder";
+import CreateReminderDto from "../dtos/reminder";
+import Reminder from "../models/reminder";
 
 const router = Router();
 
+// Mock DB. array of reminders
+const reminders: Reminder[] = [];
+
 router.get("/", (req, res) => {
-  res.send("List of reminders");
+  res.json(reminders);
 });
 
 router.post("/", (req, res) => {
   const { title } = req.body as CreateReminderDto;
-  res.send(title);
+  const reminder = new Reminder(title);
+
+  // save to a DB.
+  reminders.push(reminder);
+  res.status(201).json(reminders);
 });
 
 export default router;
